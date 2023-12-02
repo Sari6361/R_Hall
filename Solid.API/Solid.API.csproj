@@ -7,7 +7,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\CustomerController.cs\**" />
+    <Content Remove="Controllers\CustomerController.cs\**" />
+    <EmbeddedResource Remove="Controllers\CustomerController.cs\**" />
+    <None Remove="Controllers\CustomerController.cs\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Solid.Core\Solid.Core.csproj" />
+    <ProjectReference Include="..\Solid.Data\Solid.Data.csproj" />
+    <ProjectReference Include="..\Solid.Service\Solid.Service.csproj" />
   </ItemGroup>
 
 </Project>
