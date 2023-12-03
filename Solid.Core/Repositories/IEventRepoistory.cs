@@ -11,7 +11,7 @@ namespace Solid.Core.Repositories
     public interface IEventRepoistory
     {
         IEnumerable<Event> GetEvents();
-        IActionResult GetEventById(int id);
+        Event GetEventById(int id);
         void AddEvent(Event e);
         void UpdateEventById(int id, Event e);
         void DeleteEventById(int id);

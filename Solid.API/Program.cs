@@ -1,5 +1,6 @@
 using Solid.Core.Repositories;
 using Solid.Core.Service;
+using Solid.Data;
 using Solid.Data.Repositories;
 using Solid.Service.Services;
 
@@ -19,6 +20,8 @@ builder.Services.AddSingleton<IEventRepoistory,EventRepository>();
 builder.Services.AddSingleton<ICustomerService, CustomerService>();
 builder.Services.AddSingleton<ICateringService, CateringService>();
 builder.Services.AddSingleton<IEventService, EventService>();
+
+
 
 
 var app = builder.Build();
