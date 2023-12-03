@@ -19,7 +19,7 @@ namespace Solid.Data.Repositories
         }
         public IEnumerable<Catering> GetCaterings(bool? status)
         {
-            return (IEnumerable<Catering>)_context.CustomerList.Where(c => (c.Status == status || status is null));
+            return _context.CateringList.Where(c => (c.Status == status || status is null));
         }
 
         public Catering GetCateringById(int id) => _context.CateringList.Find(c => c.Id == id);

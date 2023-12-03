@@ -13,16 +13,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
  
-builder.Services.AddSingleton<ICustomerRepository,CustomerRepository>();
-builder.Services.AddSingleton<ICateringRepository,CateringRepository>();
-builder.Services.AddSingleton<IEventRepoistory,EventRepository>();
+builder.Services.AddScoped<ICustomerRepository,CustomerRepository>();
+builder.Services.AddScoped<ICateringRepository,CateringRepository>();
+builder.Services.AddScoped<IEventRepoistory,EventRepository>();
 
-builder.Services.AddSingleton<ICustomerService, CustomerService>();
-builder.Services.AddSingleton<ICateringService, CateringService>();
-builder.Services.AddSingleton<IEventService, EventService>();
+builder.Services.AddScoped<ICustomerService, CustomerService>();
+builder.Services.AddScoped<ICateringService, CateringService>();
+builder.Services.AddScoped<IEventService, EventService>();
 
-
-
+builder.Services.AddSingleton<DataContext>();
 
 var app = builder.Build();
 
