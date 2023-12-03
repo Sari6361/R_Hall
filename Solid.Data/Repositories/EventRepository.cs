@@ -32,8 +32,8 @@ namespace Solid.Data.Repositories
         {
             Event ev = _context.EventList.Find(e => e.Id == id);
             if (ev is not null)
-                _context.EventList.Remove(e);
-            _context.EventList.Add(ev); 
+                _context.EventList.Remove(ev);
+            _context.EventList.Add(e); 
         }
         public void DeleteEventById(int id)
         {
