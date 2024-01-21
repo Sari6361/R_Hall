@@ -13,9 +13,9 @@ namespace Solid.Core.Repositories
         IEnumerable<Catering> GetCaterings(bool? status);
         Catering GetCateringById(int id);
         Catering GetCateringByName(string name);
-        void AddCatering(Catering catering);
-        void UpdateCateringById(int id, Catering catering);
-        void UpdateCateringStatus(int id, bool status);
+        Catering AddCatering(Catering catering);
+        Catering UpdateCateringById(int id, Catering catering);
+        Catering UpdateCateringStatus(int id, bool status);
 
 
 

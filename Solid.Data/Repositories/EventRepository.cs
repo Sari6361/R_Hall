@@ -20,26 +20,43 @@ namespace Solid.Data.Repositories
 
         public Event GetEventById(int id)
         {
-            return _context.EventList.Find(e => e.Id == id);
+            return _context.EventList.Find(id);
         }
-        public void AddEvent(Event e)
+        public Event AddEvent(Event e)
         {
             _context.EventList.Add(e);
+            _context.SaveChanges();
+            return e;
         }
 
 
-        public void UpdateEventById(int id, Event e)
+        public Event UpdateEventById(int id, Event e)
         {
-            Event ev = _context.EventList.Find(e => e.Id == id);
+            Event ev = _context.EventList.Find(id);
             if (ev is not null)
-                _context.EventList.Remove(ev);
-            _context.EventList.Add(e); 
+            {
+                ev.Date = e.Date;
+                ev.Start_hour = e.Start_hour;
+                ev.End_hour = e.End_hour;
+                ev.EventKind = e.EventKind;
+                ev.Sum = e.Sum;
+                ev.HasPaid = e.HasPaid;
+                ev.CateringId = e.CateringId;
+                ev.CustomerId = e.CustomerId;
+                ev.AmountOfPortions = e.AmountOfPortions;
+                ev.Comments = e.Comments;
+            }
+            else
+                _context.EventList.Add(e);
+            _context.SaveChanges();
+            return ev;
         }
         public void DeleteEventById(int id)
         {
-            Event e = _context.EventList.Find(e => e.Id == id);
+            Event e = _context.EventList.Find(id);
             if (e is not null)
                 _context.EventList.Remove(e);
+            _context.SaveChanges();
         }
     }
 }

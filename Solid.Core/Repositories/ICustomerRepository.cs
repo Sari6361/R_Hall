@@ -13,8 +13,8 @@ namespace Solid.Core.Repositories
         IEnumerable<Customer> GetCustomers(bool ?status);
         Customer GetCustomerById(int id);
         Customer GetCustomerByPhone(string phone);
-        void AddCustomer(Customer customer);
-        void UpdateCustomer(int id, Customer customer);
-        void UpdateCustomerStatus(int id, bool status);
+        Customer AddCustomer(Customer customer);
+        Customer UpdateCustomer(int id, Customer customer);
+        Customer UpdateCustomerStatus(int id, bool status);
     }
 }

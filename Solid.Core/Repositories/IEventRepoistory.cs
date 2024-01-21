@@ -12,8 +12,8 @@ namespace Solid.Core.Repositories
     {
         IEnumerable<Event> GetEvents();
         Event GetEventById(int id);
-        void AddEvent(Event e);
-        void UpdateEventById(int id, Event e);
+        Event AddEvent(Event e);
+        Event UpdateEventById(int id, Event e);
         void DeleteEventById(int id);
     }
 }

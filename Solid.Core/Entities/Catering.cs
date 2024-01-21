@@ -15,17 +15,6 @@ namespace Solid.Core.Entities
         public TypeFood TypeFood { get; set; }
         public int PriceForPlate { get; set; }
         public bool Status { get; set; }
-        public Catering()
-        {
-
-        }
-        public Catering(int id, string name, TypeFood typeFood, int priceforplate)
-        {
-            Id = id;
-            Name = name;
-            TypeFood = typeFood;
-            PriceForPlate = priceforplate;
-            Status = true;
-        }
+    
     }
 }
