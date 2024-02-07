@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using Solid.API.Models;
+using Solid.Core.DTOs;
 using Solid.Core.Entities;
 using Solid.Core.Service;
 
@@ -11,13 +14,20 @@ namespace Solid.API.Controllers
     public class CustomerController : ControllerBase
     {
         private readonly ICustomerService _customerService;
-        public CustomerController(ICustomerService customerService)
+        private readonly IMapper _mapper;
+        public CustomerController(ICustomerService customerService, IMapper mapper)
         {
             _customerService = customerService;
+            _mapper = mapper;
         }
         // GET: api/<CustomerController>
         [HttpGet]
-        public IEnumerable<Customer> Get(bool? status)=>_customerService.GetCustomers(status);
+        public ActionResult Get(bool? status)
+        {
+            var list = _customerService.GetCustomers(status);
+            var listDto=list.Select(c=>_mapper.Map<CustomerDto>(c)).ToList();
+            return Ok(listDto);
+        }
         
         // GET api/<CustomerController>/5
         [HttpGet("{id}")]
@@ -26,7 +36,8 @@ namespace Solid.API.Controllers
             Customer customer = _customerService.GetCustomerById(id);
             if (customer is null)
                 return NotFound();
-            return Ok(customer);
+            var customerDto= _mapper.Map<CustomerDto>(customer);
+            return Ok(customerDto);
         }
 
         [HttpGet("{phone}")]
@@ -35,14 +46,17 @@ namespace Solid.API.Controllers
             Customer customer = _customerService.GetCustomerByPhone(phone);
             if (customer is null)
                 return NotFound();
-            return Ok(customer);
+            var customerDto = _mapper.Map<CustomerDto>(customer);
+            return Ok(customerDto);
         }
 
         // POST api/<CustomerController>
         [HttpPost]
-        public void Post([FromBody] Customer value)
+        public void Post([FromBody] CustomerPostModel c)
         {
-            _customerService.AddCustomer(value);
+            var customerToAdd = _mapper.Map<Customer>(c);
+          //  var addedCustomer = _customerService.AddCustomer(customerToAdd);
+          //  _customerService.AddCustomer(value);
         }
 
         // PUT api/<CustomerController>/5

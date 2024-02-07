@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Solid.API.Models;
 using Solid.Core.Entities;
 using Solid.Core.Service;
 
@@ -17,7 +18,7 @@ namespace Solid.API.Controllers
         }
         // GET: api/<EventController>
         [HttpGet]
-        public IEnumerable<Event> Get() => _eventService.GetEvents();   
+        public IEnumerable<Event> Get() => _eventService.GetEvents();
 
 
         // GET api/<EventController>/5
@@ -33,14 +34,19 @@ namespace Solid.API.Controllers
 
         // POST api/<EventController>
         [HttpPost]
-        public void Post([FromBody] Event value) =>_eventService.AddEvent(value);   
+        public void Post([FromBody] EventPostModel e)
+        {
+            var eventToAdd = new Event { Id = e.Id, Date = e.Date, Start_hour = e.Start_hour, End_hour = e.End_hour, EventKind = e.EventKind, Sum = e.Sum, HasPaid = e.HasPaid, AmountOfPortions = e.AmountOfPortions, Comments = e.Comments };
+            _eventService.AddEvent(eventToAdd);
+        }
 
 
         // PUT api/<EventController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Event value)
+        public void Put(int id, [FromBody] Event e)
         {
-            _eventService.UpdateEventById(id, value);  
+            var eventToUpdate = new Event { Id = e.Id, Date = e.Date, Start_hour = e.Start_hour, End_hour = e.End_hour, EventKind = e.EventKind, Sum = e.Sum, HasPaid = e.HasPaid, AmountOfPortions = e.AmountOfPortions, Comments = e.Comments };
+            _eventService.UpdateEventById(id, eventToUpdate);
         }
 
         // DELETE api/<EventController>/5

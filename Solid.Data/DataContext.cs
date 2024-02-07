@@ -2,6 +2,7 @@
 using Solid.Core.Entities;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,7 @@ namespace Solid.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=hall_db");
+            optionsBuilder.LogTo((message)=>Debug.WriteLine(message));
         }
     }
 }

@@ -8,17 +8,12 @@
 
   <ItemGroup>
     <Compile Remove="Controllers\CustomerController.cs\**" />
-    <Compile Remove="NewFolder1\**" />
     <Content Remove="Controllers\CustomerController.cs\**" />
-    <Content Remove="NewFolder1\**" />
     <EmbeddedResource Remove="Controllers\CustomerController.cs\**" />
-    <EmbeddedResource Remove="NewFolder1\**" />
     <None Remove="Controllers\CustomerController.cs\**" />
-    <None Remove="NewFolder1\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.25">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -30,6 +25,10 @@
     <ProjectReference Include="..\Solid.Core\Solid.Core.csproj" />
     <ProjectReference Include="..\Solid.Data\Solid.Data.csproj" />
     <ProjectReference Include="..\Solid.Service\Solid.Service.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="NewFolder\" />
   </ItemGroup>
 
 </Project>

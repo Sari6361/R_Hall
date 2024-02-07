@@ -1,14 +1,13 @@
-﻿using System;
+﻿using Solid.Core.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Solid.Core.Entities
+namespace Solid.Core.DTOs
 {
-    public enum EventKind { Bar_Mitzva, Wedding, Sheva_Brachos, Brit, Pidyon, Other }
-
-    public class Event
+    public class EventDto
     {
         public int Id { get; set; }
 
@@ -26,15 +25,11 @@ namespace Solid.Core.Entities
 
         public int SumToPay { get => Sum - HasPaid; }
 
-        public Customer Customer { get; set; }
-
-        public Catering Catering { get; set; }
 
         public int AmountOfPortions { get; set; }
 
         public string? Comments { get; set; }
 
-        public override string ToString()=>"event number: " + Id + " on " + Date + " from houers";
-     
+
     }
 }

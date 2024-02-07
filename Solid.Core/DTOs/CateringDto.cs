@@ -1,26 +1,22 @@
-﻿using System;
+﻿using Solid.Core.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Solid.Core.Entities
+namespace Solid.Core.DTOs
 {
-    public enum TypeFood { Dairy = 1, Fleshy, Parve }
-
-    public class Catering
+    public class CateringDto
     {
         public int Id { get; set; }
-       
-        public string Name { get; set; }
-        
-        public TypeFood TypeFood { get; set; }
-        
-        public int PriceForPlate { get; set; }
-        
-        public bool Status { get; set; }
-        
-        //public List<Event>? Events { get; set; }
 
+        public string Name { get; set; }
+
+        public TypeFood TypeFood { get; set; }
+
+        public int PriceForPlate { get; set; }
+
+        public bool Status { get; set; }
     }
 }

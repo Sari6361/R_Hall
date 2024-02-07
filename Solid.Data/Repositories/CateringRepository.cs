@@ -29,7 +29,7 @@ namespace Solid.Data.Repositories
         public Catering AddCatering(Catering catering)
         {
             _context?.CateringList?.Add(catering);
-            _context.SaveChanges();
+            _context?.SaveChanges();
             return catering;
         }
 

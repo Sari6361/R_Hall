@@ -41,8 +41,6 @@ namespace Solid.Data.Repositories
                 ev.EventKind = e.EventKind;
                 ev.Sum = e.Sum;
                 ev.HasPaid = e.HasPaid;
-                ev.CateringId = e.CateringId;
-                ev.CustomerId = e.CustomerId;
                 ev.AmountOfPortions = e.AmountOfPortions;
                 ev.Comments = e.Comments;
             }

@@ -43,7 +43,7 @@ namespace Solid.Data.Repositories
             {
                 c.Name = customer.Name;
                 c.Status = customer.Status;
-                c.Adress = customer.Adress;
+                c.Address = customer.Address;
                 c.Comment = customer.Comment;
                 c.Email = customer.Email;
                 c.Phone_num = customer.Phone_num;
