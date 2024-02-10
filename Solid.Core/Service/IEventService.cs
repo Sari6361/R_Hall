@@ -11,7 +11,7 @@ namespace Solid.Core.Service
     {
         IEnumerable<Event> GetEvents();
         Event GetEventById(int id);
-        void AddEvent(Event e);
+        Event AddEvent(Event e);
         void UpdateEventById(int id, Event e);
         void DeleteEventById(int id);
     }

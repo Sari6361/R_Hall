@@ -26,7 +26,7 @@ namespace Solid.Service.Services
         public Catering GetCateringByName(string name)=>_cateringRepository.GetCateringByName(name);
 
 
-        public void AddCatering(Catering catering) => _cateringRepository.AddCatering(catering);
+        public Catering AddCatering(Catering catering) => _cateringRepository.AddCatering(catering);
        
 
         public void UpdateCateringById(int id, Catering catering)=>_cateringRepository.UpdateCateringById(id, catering);

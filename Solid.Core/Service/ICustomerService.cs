@@ -13,7 +13,7 @@ namespace Solid.Core.Service
         IEnumerable<Customer> GetCustomers(bool? status);
         Customer GetCustomerById(int id);
         Customer GetCustomerByPhone(string phone);
-        void AddCustomer(Customer customer);
+        Customer AddCustomer(Customer customer);
         void UpdateCustomer(int id, Customer customer);
         void UpdateCustomerStatus(int id, bool status);
     }

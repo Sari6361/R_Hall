@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Solid.API.Models;
+using Solid.Core.DTOs;
 using Solid.Core.Entities;
 using Solid.Core.Service;
+using Solid.Service.Services;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,48 +14,67 @@ namespace Solid.API.Controllers
     public class EventController : ControllerBase
     {
         private readonly IEventService _eventService;
-        public EventController(IEventService eventService)
+        private readonly IMapper _mapper;
+        public EventController(IEventService eventService, IMapper mapper)
         {
             _eventService = eventService;
+            _mapper = mapper;
         }
         // GET: api/<EventController>
         [HttpGet]
-        public IEnumerable<Event> Get() => _eventService.GetEvents();
+        public ActionResult< IEnumerable<Event>> Get()
+        {
+            var list = _eventService.GetEvents();
+            var listDto = list.Select(e=> _mapper.Map<EventDto>(e)).ToList();
+            return Ok(listDto);
+        }
 
 
         // GET api/<EventController>/5
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public IActionResult GetById(int id)
         {
-            Event eve = _eventService.GetEventById(id);
+            var eve=  _eventService.GetEventById(id);
             if (eve is null)
                 return NotFound();
-            return Ok(eve);
+            var eveDto=_mapper.Map<EventDto>(eve);
+            return Ok(eveDto);
         }
 
 
         // POST api/<EventController>
         [HttpPost]
-        public void Post([FromBody] EventPostModel e)
+        public ActionResult Post([FromBody] EventPostModel e)
         {
-            var eventToAdd = new Event { Id = e.Id, Date = e.Date, Start_hour = e.Start_hour, End_hour = e.End_hour, EventKind = e.EventKind, Sum = e.Sum, HasPaid = e.HasPaid, AmountOfPortions = e.AmountOfPortions, Comments = e.Comments };
-            _eventService.AddEvent(eventToAdd);
+            var eventToAdd = _mapper.Map<Event>(e);
+            var addedEvent= _eventService.AddEvent(eventToAdd);
+            var newEvent = _eventService.GetEventById(addedEvent.Id);
+            var eventDto = _mapper.Map<EventDto>(newEvent);
+            return Ok(eventDto); 
         }
 
 
         // PUT api/<EventController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Event e)
+        public ActionResult Put(int id, [FromBody] EventPostModel e)
         {
-            var eventToUpdate = new Event { Id = e.Id, Date = e.Date, Start_hour = e.Start_hour, End_hour = e.End_hour, EventKind = e.EventKind, Sum = e.Sum, HasPaid = e.HasPaid, AmountOfPortions = e.AmountOfPortions, Comments = e.Comments };
-            _eventService.UpdateEventById(id, eventToUpdate);
+            var existEvent=_eventService.GetEventById(id);
+            if (existEvent is null)
+                return NotFound();
+            _mapper.Map(e, existEvent);
+            _eventService.UpdateEventById(id, existEvent);
+          return Ok(_mapper.Map<EventDto>(e));
         }
 
         // DELETE api/<EventController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
+            var e = _eventService.GetEventById(id);
+            if (e is null)
+                return NotFound();
             _eventService.DeleteEventById(id);
+            return NoContent();
         }
     }
 }

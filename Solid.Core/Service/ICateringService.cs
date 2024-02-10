@@ -13,7 +13,7 @@ namespace Solid.Core.Service
         IEnumerable<Catering> GetCaterings(bool? status);
         Catering GetCateringById(int id);
         Catering GetCateringByName(string name);
-        void AddCatering(Catering catering);
+        Catering AddCatering(Catering catering);
         void UpdateCateringById(int id, Catering catering);
         void UpdateCateringStatus(int id, bool status);
     }

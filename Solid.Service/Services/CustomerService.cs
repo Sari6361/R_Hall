@@ -22,7 +22,11 @@ namespace Solid.Service.Services
 
         public Customer GetCustomerByPhone(string phone) => _customerRepository.GetCustomerByPhone(phone);
 
-        public void AddCustomer(Customer customer) => _customerRepository.AddCustomer(customer);
+        public Customer AddCustomer(Customer customer)
+        {
+
+             return _customerRepository.AddCustomer(customer);
+        }
 
         public void UpdateCustomer(int id, Customer customer) => _customerRepository.UpdateCustomer(id, customer);
 

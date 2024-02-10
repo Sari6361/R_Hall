@@ -25,18 +25,18 @@ namespace Solid.API.Controllers
         public ActionResult Get(bool? status)
         {
             var list = _customerService.GetCustomers(status);
-            var listDto=list.Select(c=>_mapper.Map<CustomerDto>(c)).ToList();
+            var listDto = list.Select(c => _mapper.Map<CustomerDto>(c)).ToList();
             return Ok(listDto);
         }
-        
+
         // GET api/<CustomerController>/5
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            Customer customer = _customerService.GetCustomerById(id);
+            var customer = _customerService.GetCustomerById(id);
             if (customer is null)
                 return NotFound();
-            var customerDto= _mapper.Map<CustomerDto>(customer);
+            var customerDto = _mapper.Map<CustomerDto>(customer);
             return Ok(customerDto);
         }
 
@@ -52,25 +52,37 @@ namespace Solid.API.Controllers
 
         // POST api/<CustomerController>
         [HttpPost]
-        public void Post([FromBody] CustomerPostModel c)
+        public ActionResult Post([FromBody] CustomerPostModel c)
         {
             var customerToAdd = _mapper.Map<Customer>(c);
-          //  var addedCustomer = _customerService.AddCustomer(customerToAdd);
-          //  _customerService.AddCustomer(value);
+            var addedCustomer = _customerService.AddCustomer(customerToAdd);
+            var newCustomer = _customerService.GetCustomerById(addedCustomer.Id);
+            var customerDto = _mapper.Map<CustomerDto>(newCustomer);
+            return Ok(customerDto);
         }
 
         // PUT api/<CustomerController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Customer value)
+        public ActionResult Put(int id, [FromBody] CustomerPostModel c)
         {
-             _customerService.UpdateCustomer(id, value);
-           
+            var existCustomer = _customerService.GetCustomerById(id);
+            if (existCustomer is null)
+                return NotFound();
+            _mapper.Map(c, existCustomer);
+            _customerService.UpdateCustomer(id, existCustomer);
+            return Ok(_mapper.Map<CustomerDto>(existCustomer));
         }
 
         [HttpPut("{id}/status")]
-        public void PutStatus(int id, [FromBody] bool status)
+        public ActionResult PutStatus(int id, [FromBody] bool status)
         {
-            _customerService.UpdateCustomerStatus(id, status);  
+
+            var existCustomer = _customerService.GetCustomerById(id);
+            if (existCustomer is null)
+                return NotFound();
+            existCustomer.Status = status;
+            _customerService.UpdateCustomerStatus(id, status);
+            return Ok(_mapper.Map<CustomerDto>(existCustomer));
         }
     }
 }

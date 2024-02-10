@@ -17,7 +17,7 @@ namespace Solid.Service.Services
         
         public Event GetEventById(int id)=>_eventRepoistory.GetEventById(id);
         
-        public void AddEvent(Event e)=>_eventRepoistory.AddEvent(e);
+        public Event AddEvent(Event e)=>_eventRepoistory.AddEvent(e);
        
         public void UpdateEventById(int id, Event e)=>_eventRepoistory.UpdateEventById(id, e);  
         
