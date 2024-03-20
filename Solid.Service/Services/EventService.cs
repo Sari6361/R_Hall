@@ -7,12 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Solid.Service.Services
 {
     public class EventService : IEventService
     {
         private readonly IEventRepoistory _eventRepoistory;
-       
+
+        public EventService(IEventRepoistory eventRepoistory)
+        {
+            _eventRepoistory = eventRepoistory;
+        }
+
         public IEnumerable<Event> GetEvents()=>_eventRepoistory.GetEvents();
         
         public Event GetEventById(int id)=>_eventRepoistory.GetEventById(id);

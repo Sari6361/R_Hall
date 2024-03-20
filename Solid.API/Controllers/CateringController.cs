@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Solid.Core.DTOs;
 using Solid.Core.Entities;
@@ -11,6 +12,7 @@ namespace Solid.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CateringController : ControllerBase
     {
         private readonly ICateringService _cateringService;
@@ -23,6 +25,7 @@ namespace Solid.API.Controllers
         }
         // GET: api/<CateringController>
         [HttpGet]
+        [AllowAnonymous]
         public ActionResult<IEnumerable<CateringDto>> Get(bool? status)
         {
             var list = _cateringService.GetCaterings(status);
@@ -32,6 +35,7 @@ namespace Solid.API.Controllers
 
         // GET api/<CateringController>/5
         [HttpGet("{id}/id")]
+        [AllowAnonymous]
         public IActionResult GetById(int id)
         {
             var c = _cateringService.GetCateringById(id);
@@ -43,6 +47,7 @@ namespace Solid.API.Controllers
 
 
         [HttpGet("{name}/name")]
+        [AllowAnonymous]
         public IActionResult GetByName(string name)
         {
             Catering c = _cateringService.GetCateringByName(name);

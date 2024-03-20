@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Solid.API.Models;
 using Solid.Core.DTOs;
 using Solid.Core.Entities;
@@ -11,6 +13,7 @@ namespace Solid.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class EventController : ControllerBase
     {
         private readonly IEventService _eventService;
@@ -22,6 +25,7 @@ namespace Solid.API.Controllers
         }
         // GET: api/<EventController>
         [HttpGet]
+        [AllowAnonymous]
         public ActionResult< IEnumerable<Event>> Get()
         {
             var list = _eventService.GetEvents();
@@ -32,6 +36,7 @@ namespace Solid.API.Controllers
 
         // GET api/<EventController>/5
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public IActionResult GetById(int id)
         {
             var eve=  _eventService.GetEventById(id);

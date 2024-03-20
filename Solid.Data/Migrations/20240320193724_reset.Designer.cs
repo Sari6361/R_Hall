@@ -12,8 +12,8 @@ using Solid.Data;
 namespace Solid.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240207224144_MigrationName")]
-    partial class MigrationName
+    [Migration("20240320193724_reset")]
+    partial class reset
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -70,6 +70,9 @@ namespace Solid.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Phone_num")
                         .HasColumnType("nvarchar(max)");
 
@@ -92,13 +95,13 @@ namespace Solid.Data.Migrations
                     b.Property<int>("AmountOfPortions")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CateringId")
+                    b.Property<int>("CateringId")
                         .HasColumnType("int");
 
                     b.Property<string>("Comments")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CustomerId")
+                    b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Date")
@@ -132,11 +135,15 @@ namespace Solid.Data.Migrations
                 {
                     b.HasOne("Solid.Core.Entities.Catering", "Catering")
                         .WithMany()
-                        .HasForeignKey("CateringId");
+                        .HasForeignKey("CateringId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Solid.Core.Entities.Customer", "Customer")
                         .WithMany("Events")
-                        .HasForeignKey("CustomerId");
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Catering");
 
