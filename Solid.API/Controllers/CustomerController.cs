@@ -22,6 +22,7 @@ namespace Solid.API.Controllers
             _customerService = customerService;
             _mapper = mapper;
         }
+        
         // GET: api/<CustomerController>
         [HttpGet]
         public ActionResult Get(bool? status)
